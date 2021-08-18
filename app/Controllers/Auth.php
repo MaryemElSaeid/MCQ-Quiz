@@ -24,7 +24,7 @@ class Auth extends BaseController
 	public function save()
 	{
 		//request validations
-		//custome validations messages
+		//custom validations messages
 
 		$validation = $this->validate([
 			'name'=>[
@@ -86,6 +86,8 @@ class Auth extends BaseController
 				// return redirect()->to('register')->with('fail','Something went wrong');
 			} else {
 				// return redirect()->to('auth/register')->with('success','You registred successfully');
+				//if registered successfully redirect to userdash 
+				// make user login automatically 
 			    $last_id = $userModel->insertID();
 				session()->set("loggedUser",$last_id);
 				return redirect()->to('/userdashboard');
@@ -97,6 +99,7 @@ class Auth extends BaseController
 	function check(){
 		$validation = $this->validate([
 			//is_not_unique checks if email is in db
+			//here are the intial checks before searching in db 
 			'email'=>[
 				'rules'=>'required|valid_email|is_not_unique[users.email]',
 				'errors'=>[
@@ -129,25 +132,40 @@ class Auth extends BaseController
 			if($email == 'admin@admin.com' && $password == 'admin'){
 				$user_id = $user_info['id'];
 				session()->set('loggedAdmin',$user_id);
+				// dd(session());
 				//redirect de l controller msh view
+				// if(session()->has('loggedAdmin')){
+				// 	dd(session());
+				// }
 				return redirect()->to('/admindashboard');
 			}
-
+	
+            //law 3adda mn el if de yb2a da msh admin w aroo7 
+			//a check 3ala info bt3to fel db 
 			if(!$check_password){
 				session()->setFlashdata('fail','Incorrect Password');
 				return redirect()->to('/auth')->withInput();
 			} else {
 				$user_id = $user_info['id'];
 				session()->set('loggedUser',$user_id);
+				// if(session()->has('loggedAdmin')){
+				// 	dd(session());
+				// }
 				return redirect()->to('/userdashboard');
+
 			}
 		}
 
 	}
 
 	function logout(){
-		if(session()->has('loggedUser' || 'loggedAdmin')){
-			session()->remove('loggedUser' || 'loggedAdmin');
+		if(session()->has('loggedUser')){
+			session()->remove('loggedUser');
+			return redirect()->to('/auth?access=out')->with('fail','You are logged out!');
+		}
+
+		if(session()->has('loggedAdmin')){
+			session()->remove('loggedAdmin');
 			return redirect()->to('/auth?access=out')->with('fail','You are logged out!');
 		}
 	}

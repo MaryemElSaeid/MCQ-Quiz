@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class AlreadyLoggedInFilter implements FilterInterface
+class AdminCheckFilter implements FilterInterface
 {
 	/**
 	 * Do whatever processing this filter needs to do.
@@ -25,8 +25,9 @@ class AlreadyLoggedInFilter implements FilterInterface
 	 */
 	public function before(RequestInterface $request, $arguments = null)
 	{
-	    if(session()->has('loggedUser')){
-			return redirect()->back();	
+		if(!session()->has('loggedAdmin') || session()->has('loggedUser') ){
+	
+			return redirect()->to('/auth')->with('fail','Access Denied');
 		}
 	}
 

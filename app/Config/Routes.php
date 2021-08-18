@@ -34,11 +34,14 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('', ['filter'=>'AdminCheck'],function($routes){
+	//add all routes that i want to protect by this filter
+	$routes->get('/admindashboard','AdminDashboard::index');
+});
 //add group of routes to be protected by filter 
 $routes->group('', ['filter'=>'AuthCheck'],function($routes){
 	//add all routes that i want to protect by this filter
 	$routes->get('/userdashboard','UserDashboard::index');
-	// $routes->get('/admindashboard','AdminDashboard::index');
 });
 
 $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
@@ -46,6 +49,8 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 	$routes->get('/auth','Auth::index');
 	$routes->get('/auth/register','Auth::register');
 });
+
+
 
 /*
  * --------------------------------------------------------------------
