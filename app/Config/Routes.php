@@ -52,6 +52,8 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 
 //user data
 $routes->get('user','UserDashboard::list');
+$routes->get('user-add','UserDashboard::create');
+$routes->post('user-store','UserDashboard::store');
 
 
 

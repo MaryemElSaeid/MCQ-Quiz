@@ -14,10 +14,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-5">
+               <div>
+                    <?php if(session()->getFlashdata('success')) : ?>
+                        <div class="success alert-success" style="border-radius:5px; padding:5px;text-align:center;"><?= session()->getFlashdata('success'); ?>
+                    <?php endif ?>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h4>Users Data
-                        <a href="" class="btn btn-primary float-right">Add User</a>
+                        <a href="<?= base_url('user-add')?>" class="btn btn-primary float-right">Add User</a>
                         </h4>
 
                     </div>
@@ -33,10 +38,10 @@
                             <tbody>
                                 <?php foreach($user as $row) : ?>
                                 <tr>
-                                    <?php if($row['email'] == "admin@admin.com"){ ?>
+                                    <?php if($row['role_id'] == 1){ ?>
                                         
                                         <?php continue; ?>
-                                        <?php } ?>
+                                    <?php } ?>
  
                                     <td><?= $row['id'] ?></td>
                                     <td><?= $row['name'] ?></td>

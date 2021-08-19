@@ -77,6 +77,7 @@ class Auth extends BaseController
 				'role_id'=>$role_id,
 			];
 
+
 			$userModel = new \App\Models\UsersModel();
 			//insert data into database
 			$query = $userModel->insert($values);
