@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsersModel extends Model
+class RolesModel extends Model
 {
-	// protected $DBGroup              = 'default';
-	protected $table                = 'users';
+	protected $table                = 'roles';
 	protected $primaryKey           = 'id';
-	protected $allowedFields = ['name','email','password','role_id'];
+	protected $allowedFields = ['role'];
+
 	// protected $useAutoIncrement     = true;
 	// protected $insertID             = 0;
 	// protected $returnType           = 'array';
@@ -17,20 +17,20 @@ class UsersModel extends Model
 	// protected $protectFields        = true;
 	// protected $allowedFields        = [];
 
-	// // Dates
+	// Dates
 	// protected $useTimestamps        = false;
 	// protected $dateFormat           = 'datetime';
 	// protected $createdField         = 'created_at';
 	// protected $updatedField         = 'updated_at';
 	// protected $deletedField         = 'deleted_at';
 
-	// // Validation
+	// Validation
 	// protected $validationRules      = [];
 	// protected $validationMessages   = [];
 	// protected $skipValidation       = false;
 	// protected $cleanValidationRules = true;
 
-	// // Callbacks
+	// Callbacks
 	// protected $allowCallbacks       = true;
 	// protected $beforeInsert         = [];
 	// protected $afterInsert          = [];

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class Roles extends Migration
 {
 	public function up()
 	{
@@ -15,25 +15,20 @@ class Users extends Migration
 					'unsigned'       => true,
 					'auto_increment' => true,
 			],
-			'name'       => [
+			'role'       => [
 					'type'       => 'VARCHAR',
 					'constraint' => '50',
 			],
-			'email'       => [
-				'type'       => 'VARCHAR',
-				'constraint' => '100',
-	     	],
-			 'password'       => [
-				'type'       => 'VARCHAR',
-				'constraint' => '100',
-			]
 	]);
 	$this->forge->addKey('id', true);
-	$this->forge->createTable('users');
+	$this->forge->createTable('roles');
 	}
+
 
 	public function down()
 	{
 		//
 	}
 }
+
+

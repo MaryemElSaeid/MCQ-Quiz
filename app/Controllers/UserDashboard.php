@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UsersModel;
 
 class UserDashboard extends BaseController
 {
@@ -16,5 +17,11 @@ class UserDashboard extends BaseController
 			'userInfo'=>$userInfo
 		];
 		return view('dashboard/userdashboard',$data);
+	}
+
+	public function list(){
+		$userModel = new UsersModel();
+		$data['user'] = $userModel->findAll();
+		return view('users/index',$data);
 	}
 }

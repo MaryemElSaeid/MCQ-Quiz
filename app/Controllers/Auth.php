@@ -25,7 +25,6 @@ class Auth extends BaseController
 	{
 		//request validations
 		//custom validations messages
-
 		$validation = $this->validate([
 			'name'=>[
 				'rules'=>'required',
@@ -69,11 +68,13 @@ class Auth extends BaseController
 			$name = $this->request->getPost('name');
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
+			$role_id = $this->role_id = 2;
 
 			$values = [
 				'name'=>$name,
 				'email'=>$email,
 				'password'=>Hash::make($password),
+				'role_id'=>$role_id,
 			];
 
 			$userModel = new \App\Models\UsersModel();
@@ -122,22 +123,23 @@ class Auth extends BaseController
 			return view('auth/login',['validation'=>$this->validator]);
 		} else {
 			$email = $this->request->getPost('email');
-			// dd($email);
 			$password = $this->request->getPost('password');
 			$userModel = new \App\Models\UsersModel();
 			//fetch user info according to email 
 			$user_info = $userModel->where('email',$email)->first();
+			$roleid = $user_info['role_id'];
+			// dd($roleid);
 			$check_password = Hash::check($password,$user_info['password']);
-
-			if($email == 'admin@admin.com' && $password == 'admin'){
+    
+			if($roleid == 1 && $check_password ){
 				$user_id = $user_info['id'];
 				session()->set('loggedAdmin',$user_id);
+				return redirect()->to('/admindashboard');
 				// dd(session());
 				//redirect de l controller msh view
 				// if(session()->has('loggedAdmin')){
 				// 	dd(session());
 				// }
-				return redirect()->to('/admindashboard');
 			}
 	
             //law 3adda mn el if de yb2a da msh admin w aroo7 
