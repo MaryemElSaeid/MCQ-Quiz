@@ -8,7 +8,7 @@ class RolesModel extends Model
 {
 	protected $table                = 'roles';
 	protected $primaryKey           = 'id';
-	protected $allowedFields = ['role'];
+	protected $allowedFields        = ['role'];
 
 	// protected $useAutoIncrement     = true;
 	// protected $insertID             = 0;

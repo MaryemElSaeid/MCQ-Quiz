@@ -18,6 +18,9 @@
                     <?php if(session()->getFlashdata('success')) : ?>
                         <div class="success alert-success" style="border-radius:5px; padding:5px;text-align:center;"><?= session()->getFlashdata('success'); ?>
                     <?php endif ?>
+                    <?php if(session()->getFlashdata('fail')) : ?>
+                        <div class="success alert-danger" style="border-radius:5px; padding:5px;text-align:center;"><?= session()->getFlashdata('fail'); ?>
+                    <?php endif ?>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -38,17 +41,20 @@
                             <tbody>
                                 <?php foreach($user as $row) : ?>
                                 <tr>
-                                    <?php if($row['role_id'] == 1){ ?>
-                                        
+                                    <?php if($row['role_id'] == 1){ ?> 
                                         <?php continue; ?>
                                     <?php } ?>
  
                                     <td><?= $row['id'] ?></td>
                                     <td><?= $row['name'] ?></td>
                                     <td><?= $row['email'] ?></td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                    <td class="d-flex justify-content-around">
+                                        <a href="<?= base_url('user/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
+                                        <form action="<?= base_url('user/delete/'.$row['id'])?>" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user ?')">Delete</button>
+                                        </form>
+                                        
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

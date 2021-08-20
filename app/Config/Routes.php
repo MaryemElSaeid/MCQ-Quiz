@@ -37,6 +37,12 @@ $routes->get('/', 'Home::index');
 $routes->group('', ['filter'=>'AdminCheck'],function($routes){
 	//add all routes that i want to protect by this filter
 	$routes->get('/admindashboard','AdminDashboard::index');
+	$routes->get('user','UserDashboard::list');
+	$routes->get('user-add','UserDashboard::create');
+	$routes->post('user-store','UserDashboard::store');
+	$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
+	$routes->put('user/update/(:num)','UserDashboard::update/$1');
+	$routes->delete('user/delete/(:num)','UserDashboard::delete/$1');
 });
 //add group of routes to be protected by filter 
 $routes->group('', ['filter'=>'AuthCheck'],function($routes){
@@ -54,6 +60,8 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 $routes->get('user','UserDashboard::list');
 $routes->get('user-add','UserDashboard::create');
 $routes->post('user-store','UserDashboard::store');
+$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
+$routes->post('user/update/(:num)','UserDashboard::update/$1');
 
 
 

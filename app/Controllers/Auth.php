@@ -41,19 +41,18 @@ class Auth extends BaseController
 				]
 			],
 			'password'=>[
-				'rules'=>'required|min_length[5]|max_length[15]',
+				'rules'=>'required|min_length[5]',
 				'errors'=>[
 					'required'=>'Password is a required field',
 					'min_length'=>'Password must have at least 5 characters',
-					'max_length'=>'Password can not be more than 15 characters',
+				
 				]
 			],
 			'cpassword'=>[
-				'rules'=>'required|min_length[5]|max_length[15]|matches[password]',
+				'rules'=>'required|min_length[5]|matches[password]',
 				'errors'=>[
 					'required'=>'Confirm password is a required field',
 					'min_length'=>'Confirm password must have at least 5 characters',
-					'max_length'=>'Confirm password can not be more than 15 characters',
 					'matches'=>'Confirm password must match password'
 				]
 			],
@@ -111,11 +110,10 @@ class Auth extends BaseController
 				]
 			],
 			'password'=>[
-				'rules'=>'required|min_length[5]|max_length[15]',
+				'rules'=>'required|min_length[5]',
 				'errors'=>[
 					'required'=>'Password is a required field',
 					'min_length'=>'Password must have at least 5 characters',
-					'max_length'=>'Password can not be more than 15 characters',
 				]
 			]
 		]);
