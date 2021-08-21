@@ -56,12 +56,8 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 	$routes->get('/auth/register','Auth::register');
 });
 
-//user data
-$routes->get('user','UserDashboard::list');
-$routes->get('user-add','UserDashboard::create');
-$routes->post('user-store','UserDashboard::store');
-$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
-$routes->post('user/update/(:num)','UserDashboard::update/$1');
+//quiz data
+$routes->get('quiz','QuizController::index');
 
 
 

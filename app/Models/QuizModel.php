@@ -4,16 +4,29 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsersModel extends Model
+class QuizModel extends Model
 {
 	// protected $DBGroup              = 'default';
-	protected $table                = 'users';
+	protected $table                = 'quizzes';
 	protected $primaryKey           = 'id';
-	protected $allowedFields = ['name','email','password','role_id'];
-	public $has_many = array( "quiz" );
+	protected $allowedFields = ['title','desc','total','host_id'];
+	// public $has_one = array( "users" );
+	// $builder = $db->table('blogs');
+	// $builder->select('*');
+	// $builder->join('comments', 'comments.id = blogs.id');
+	// $query = $builder->get();
+
+	public function getAllQuizzesQuery(){
+
+		$query = "SELECT * FROM users as u,quizzes as q WHERE q.host_id = u.id ";
+		$query=$this->db->query($query);	
+		return $query->getResultArray();
+					  
+	   }   
+
+    // return $query;
 
 
-	
 	// protected $useAutoIncrement     = true;
 	// protected $insertID             = 0;
 	// protected $returnType           = 'array';
