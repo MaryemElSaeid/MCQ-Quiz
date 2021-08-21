@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Quiz extends Migration
+class Questions extends Migration
 {
 	public function up()
 	{
@@ -15,27 +15,36 @@ class Quiz extends Migration
 					'unsigned'       => true,
 					'auto_increment' => true,
 			],
-			'title'       => [
+			'question'       => [
 					'type'       => 'VARCHAR',
-					'constraint' => '100',
+					'constraint' => '1500',
 			],
-			'desc'       => [
+			'choice1'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '500',
 	     	],
-			 'total'       => [
-				'type'       => 'INT',
-				'constraint' => 5 ,
-			 ],
-			 'host_id' => ['type' => 'INT',
+			 'choice2'       => [
+				'type'       => 'VARCHAR',
+				'constraint' => '500',
+	     	],
+			 'choice3'       => [
+				'type'       => 'VARCHAR',
+				'constraint' => '500',
+	     	],
+			 'answer'       => [
+				'type'       => 'VARCHAR',
+				'constraint' => '500',
+	     	],
+			 'quiz_id' => ['type' => 'INT',
                     'unsigned' => TRUE,
 			],
 			 'created_at datetime default current_timestamp',
 			 'updated_at datetime default current_timestamp on update current_timestamp', 
 	]);
-	$this->forge->addKey('id', true);
-	$this->forge->addForeignKey('host_id','users','id');
-	$this->forge->createTable('quizzes');
+		$this->forge->addKey('id', true);
+		$this->forge->addForeignKey('quiz_id','quizzes','id','CASCADE','CASCADE');
+		$this->forge->createTable('questions');
+	
 	}
 
 	public function down()

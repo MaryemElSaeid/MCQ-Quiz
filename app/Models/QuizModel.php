@@ -10,7 +10,7 @@ class QuizModel extends Model
 	protected $table                = 'quizzes';
 	protected $primaryKey           = 'id';
 	protected $allowedFields = ['title','desc','total','host_id'];
-	// public $has_one = array( "users" );
+	public $has_one = array( "users" );
 	// $builder = $db->table('blogs');
 	// $builder->select('*');
 	// $builder->join('comments', 'comments.id = blogs.id');
@@ -22,7 +22,7 @@ class QuizModel extends Model
 		$query=$this->db->query($query);	
 		return $query->getResultArray();
 					  
-	   }   
+	   }     
 
     // return $query;
 

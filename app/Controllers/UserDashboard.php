@@ -29,6 +29,12 @@ class UserDashboard extends BaseController
 		return view('users/index',$data);
 	}
 
+	public function show($id) {
+		$userModel = new UsersModel();
+		$data['user'] = $userModel->find($id);
+		return view('users/show',$data);
+    }
+
 	public function create(){
 		return view('users/create');
 	}

@@ -38,6 +38,7 @@
                                     <th>Description</th>
                                     <th>Total</th>
                                     <th>Host</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,8 +49,18 @@
                                     <td><?= $row['title'] ?></td>
                                     <td><?= $row['desc'] ?></td>
                                     <td><?= $row['total'] ?></td>   
-                                    <td><?= $row['name'];?></td>                              
+                                    <td><?= $row['name'];?></td>  
+                                    <td class="d-flex justify-content-around">
+                                        <a href="<?= base_url('quiz/show/'.$row['id'])?>" class="btn btn-primary btn-sm">View</a>
+                                        <a href="<?= base_url('quiz/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
+                                        <form action="<?= base_url('quiz/delete/'.$row['id'])?>" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this quiz ?')">Delete</button>
+                                        </form>
+                                        
+                                    </td>                            
                                 <?php endforeach; ?>
+
                                         
                                         
                                                                

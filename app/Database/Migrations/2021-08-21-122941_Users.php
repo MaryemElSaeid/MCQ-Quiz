@@ -34,7 +34,7 @@ class Users extends Migration
 			 'updated_at datetime default current_timestamp on update current_timestamp', 
 	]);
 	$this->forge->addKey('id', true);
-	$this->forge->addForeignKey('role_id','roles','id');
+	$this->forge->addForeignKey('role_id','roles','id','CASCADE','CASCADE');
 	$this->forge->createTable('users');
 	}
 

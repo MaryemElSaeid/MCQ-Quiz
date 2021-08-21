@@ -36,6 +36,7 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,7 @@
                                     <td><?= $row['name'] ?></td>
                                     <td><?= $row['email'] ?></td>
                                     <td class="d-flex justify-content-around">
+                                        <a href="<?= base_url('user/show/'.$row['id'])?>" class="btn btn-primary btn-sm">View</a>
                                         <a href="<?= base_url('user/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
                                         <form action="<?= base_url('user/delete/'.$row['id'])?>" method="POST">
                                             <input type="hidden" name="_method" value="DELETE" />

@@ -9,6 +9,7 @@ class RolesModel extends Model
 	protected $table                = 'roles';
 	protected $primaryKey           = 'id';
 	protected $allowedFields        = ['role'];
+	public $has_many = array( "users" );
 
 	// protected $useAutoIncrement     = true;
 	// protected $insertID             = 0;

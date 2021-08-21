@@ -40,6 +40,7 @@ $routes->group('', ['filter'=>'AdminCheck'],function($routes){
 	$routes->get('user','UserDashboard::list');
 	$routes->get('user-add','UserDashboard::create');
 	$routes->post('user-store','UserDashboard::store');
+	$routes->get('user/show/(:num)','UserDashboard::show/$1');
 	$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
 	$routes->put('user/update/(:num)','UserDashboard::update/$1');
 	$routes->delete('user/delete/(:num)','UserDashboard::delete/$1');
@@ -58,6 +59,12 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 
 //quiz data
 $routes->get('quiz','QuizController::index');
+$routes->get('quiz-add','QuizController::create');
+$routes->post('quiz-store','QuizController::store');
+$routes->get('quiz/show/(:num)','QuizController::show/$1');
+$routes->get('quiz/edit/(:num)','QuizController::edit/$1');
+$routes->put('quiz/update/(:num)','QuizController::update/$1');
+$routes->delete('quiz/delete/(:num)','QuizController::delete/$1');
 
 
 
