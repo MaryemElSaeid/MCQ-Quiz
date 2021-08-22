@@ -55,7 +55,7 @@
                                         <a href="<?= base_url('quiz/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
                                         <form action="<?= base_url('quiz/delete/'.$row['id'])?>" method="POST">
                                             <input type="hidden" name="_method" value="DELETE" />
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this quiz ?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this quiz ? Warning: Deleting this quiz will delete all related questions!')">Delete</button>
                                         </form>
                                         
                                     </td>                            

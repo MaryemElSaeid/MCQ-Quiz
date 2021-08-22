@@ -67,6 +67,19 @@ $routes->put('quiz/update/(:num)','QuizController::update/$1');
 $routes->delete('quiz/delete/(:num)','QuizController::delete/$1');
 
 
+//question data
+// $routes->get('quiz','QuizController::index');
+$routes->get('question/add/(:num)','QuestionController::create/$1');
+$routes->post('question/store/(:num)','QuestionController::store/$1');
+// $routes->get('quiz/show/(:num)','QuizController::show/$1');
+$routes->get('question/edit/(:num)','QuestionController::edit/$1');
+$routes->put('question/update/(:num)','QuestionController::update/$1');
+$routes->delete('question/delete/(:num)','QuestionController::delete/$1');
+
+// $routes->get('question-add','QuestionController::create');
+// $routes->post('question-store','QuestionController::store');
+
+
 
 /*
  * --------------------------------------------------------------------

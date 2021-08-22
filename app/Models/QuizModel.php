@@ -11,6 +11,7 @@ class QuizModel extends Model
 	protected $primaryKey           = 'id';
 	protected $allowedFields = ['title','desc','total','host_id'];
 	public $has_one = array( "users" );
+	public $has_many = array( "questions" );
 	// $builder = $db->table('blogs');
 	// $builder->select('*');
 	// $builder->join('comments', 'comments.id = blogs.id');

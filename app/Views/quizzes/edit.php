@@ -39,7 +39,44 @@
                             <span class="text-danger"><?= isset($validation) ? display_error($validation, 'total') : '' ?></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="<?= base_url('question/add/'.$quiz['id']) ?>" class="btn btn-primary float-right">Add Question</a>
                     </form>
+                    <table class="table table-bordered mt-4" >
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Question</th>
+                                    <th>Choice 1</th>
+                                    <th>Choice 2</th>
+                                    <th>Choice 3</th>
+                                    <th>Answer</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($question as $row) : ?>
+                                <tr>
+                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $row['question'] ?></td>
+                                    <td><?= $row['choice1'] ?></td>
+                                    <td><?= $row['choice2'] ?></td>   
+                                    <td><?= $row['choice3'];?></td>  
+                                    <td><?= $row['answer'];?></td> 
+                                    <td class="d-flex justify-content-around">
+                                        <a href="<?= base_url('question/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
+                                        <form action="<?= base_url('question/delete/'.$row['id'])?>" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this question ?')">Delete</button>
+                                        </form>
+                                        
+                                    </td>   
+                            <?php endforeach; ?>
+                                
+
+                                </tr>
+
+                            </tbody>
+                        </table>
                                             
                     </div>
                 </div>

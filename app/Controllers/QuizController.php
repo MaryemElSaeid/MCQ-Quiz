@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\QuizModel;
 use App\Models\UsersModel;
+use App\Models\QuestionsModel;
 
 class QuizController extends BaseController
 {
@@ -25,7 +26,9 @@ class QuizController extends BaseController
 
 	public function show($id) {
 		$quizModel = new QuizModel();
+		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
+		$data['question'] = $questionModel->where('quiz_id',$id)->find();
 		// dd($data);
 		return view('quizzes/show',$data);
     }
@@ -40,9 +43,10 @@ class QuizController extends BaseController
 
 		$validation = $this->validate([
 			'title'=>[
-				'rules'=>'required',
+				'rules'=>'required|is_unique[quizzes.title]',
 				'errors'=>[
-					'required'=>'Title is a required field'
+					'required'=>'Title is a required field',
+					'is_unique'=>'Title already taken'
 				]
 				
 			],
@@ -77,16 +81,20 @@ class QuizController extends BaseController
 			'total'=>$total,
 			'host_id' => $host_id,
 		];
-		// dd($data);
+		
 		$quizModel->save($data);
-		return redirect()->to('/quiz')->with('success','Quiz added successfully');
+		$id = $quizModel->where('title',$title)->first();
+		return view('questions/create',$id);
+		// return redirect()->to('/question-add')->with('success','Quiz added successfully');
 
 		}
 	}
 
 	public function edit($id){
 		$quizModel = new QuizModel();
+		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
+		$data['question'] = $questionModel->where('quiz_id',$id)->find();
 		// dd($data);
 		return view('quizzes/edit',$data);
 	}
@@ -96,9 +104,10 @@ class QuizController extends BaseController
 		$quizModel->find($id);
 		$validation = $this->validate([
 			'title'=>[
-				'rules'=>'required',
+				'rules'=>'required|is_unique[quizzes.id!='.$id.' AND '.'title=]',
 				'errors'=>[
-					'required'=>'Title is a required field'
+					'required'=>'Title is a required field',
+					'is_unique'=>'Title already taken'
 				]
 				
 			],

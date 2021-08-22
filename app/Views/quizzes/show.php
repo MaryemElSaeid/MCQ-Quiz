@@ -35,7 +35,34 @@
                             <label type="text" class="form-control" name="total" ><?= $quiz['total']; ?>
                         </div>
                     </form>
-                                            
+                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Question</th>
+                                    <th>Choice 1</th>
+                                    <th>Choice 2</th>
+                                    <th>Choice 3</th>
+                                    <th>Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($question as $row) : ?>
+                                <tr>
+                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $row['question'] ?></td>
+                                    <td><?= $row['choice1'] ?></td>
+                                    <td><?= $row['choice2'] ?></td>   
+                                    <td><?= $row['choice3'];?></td>  
+                                    <td><?= $row['answer'];?></td> 
+                           
+                            <?php endforeach; ?>
+                                
+
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

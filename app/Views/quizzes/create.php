@@ -37,7 +37,7 @@
                             <input type="text" class="form-control" name="total" placeholder="Total Marks" value="<?= set_value('total'); ?>">
                             <span class="text-danger"><?= isset($validation) ? display_error($validation, 'total') : '' ?></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Add Questions</button>
                     </form>
                                             
                     </div>
