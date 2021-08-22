@@ -14,6 +14,9 @@
     <h1>This is admin dashboard</h1>
     <h4>Welcome <?= $adminInfo['name'] ?></h4>
     <h4>email <?= $adminInfo['email'] ?></h4>
+    <a href="<?= base_url('/quiz')?>" class="btn btn-primary ">Quiz</a>
+    <a href="<?= base_url('/user')?>" class="btn btn-primary">User</a>
+    
     <a href="<?= site_url("auth/logout"); ?>">Logout</a>    
 </body>
 </html>

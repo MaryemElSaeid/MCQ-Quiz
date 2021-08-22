@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\QuizModel;
+use App\Models\UserQuizModel;
 use App\Models\UsersModel;
 use App\Models\QuestionsModel;
 
@@ -16,14 +17,17 @@ class QuizController extends BaseController
 	public function index()
 	{
 		$quizModel = new QuizModel();
-		// $user = new UsersModel();
-		// $data['quiz'] = $quiz->findAll();
 		$data['quiz'] = $quizModel->getAllQuizzesQuery();
 		return view('quizzes/index',$data);
 	}
 
-
-
+	public function listQuizForUser()
+	{
+		$quizModel = new QuizModel();
+		$data['quiz'] = $quizModel->getAllQuizzesQuery();
+		return view('quizzes/list',$data);
+	}
+	
 	public function show($id) {
 		$quizModel = new QuizModel();
 		$questionModel = new QuestionsModel();
@@ -32,6 +36,58 @@ class QuizController extends BaseController
 		// dd($data);
 		return view('quizzes/show',$data);
     }
+
+	public function showQuizForUser($id)
+	{
+		$quizModel = new QuizModel();
+		$questionModel = new QuestionsModel();
+		$data['quiz'] = $quizModel->find($id);
+		$data['question'] = $questionModel->where('quiz_id',$id)->find();
+		// dd($data);
+		return view('quizzes/showuser',$data);
+	
+	}
+
+	public function check($id)
+	{
+		$quizModel = new QuizModel();
+		$questionModel = new QuestionsModel();
+		$data['quiz'] = $quizModel->find($id);
+		$data['question'] = $questionModel->where('quiz_id',$id)->find();
+		// dd($data['quiz']['id']);
+		$number_of_questions = count($data['question']);
+		$data['user_answers']=[];
+        $score = 0;
+		
+		for($i=0;$i<$number_of_questions;$i++){
+			
+			array_push($data['user_answers'],$this->request->getPost($data['question'][$i]['id']));
+			$correct_answer = $data['question'][$i]['answer'];
+			if ($data['user_answers'][$i] == $correct_answer) {
+				$score = $score + 1; 
+			}
+		}
+
+		// dd($data);
+		$this->storeScore($data['quiz']['id'],$score);
+		return view('quizzes/results',$data);
+	
+	}
+
+	public function storeScore($quiz_id,$score){
+		$userquizModel = new UserQuizModel();
+		$user_id = session()->get('loggedUser');
+		$data = [
+			'user_id' => $user_id,
+			'quiz_id' => $quiz_id,
+			'score' => $score,
+		];
+		
+		$userquizModel->save($data);
+		// unset($_SESSION['score']);
+		
+		
+	}
 
 	public function create(){
 		return view('quizzes/create');
@@ -130,8 +186,10 @@ class QuizController extends BaseController
 		if(!$validation){
 
 		$quizModel = new QuizModel();
+		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
 		$data['validation'] = $this->validator;
+		$data['question'] = $questionModel->where('quiz_id',$id)->find();
 		return view('quizzes/edit',$data);
 		} else {
 

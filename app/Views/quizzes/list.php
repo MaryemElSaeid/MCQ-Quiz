@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <title>Users</title>
+    <!-- <link rel="stylesheet" href="mcqquiz/public/css/mcq.css"> -->
+    <title>Quizzes</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
 </head>
@@ -24,44 +25,40 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h4>Users Data
-                        
-                        <a href="<?= base_url('admindashboard')?>" class="btn btn-danger float-right">Back</a>
-                        <a href="<?= base_url('user-add')?>" class="btn btn-primary float-right">Add User</a>
+                        <h4>All Quizzes Data
+                        <a href="<?= base_url('userdashboard')?>" class="btn btn-danger float-right">Back</a>
                         </h4>
+                        
 
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
                                 <tr style="text-align:center;">
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Quiz Number</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Total</th>
+                                    <th>Host</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($user as $row) : ?>
+                                <?php foreach($quiz as $row) : ?>
                                 <tr style="text-align:center;">
-                                    <?php if($row['role_id'] == 1){ ?> 
-                                        <?php continue; ?>
-                                    <?php } ?>
- 
+                                    
                                     <td><?= $row['id'] ?></td>
-                                    <td><?= $row['name'] ?></td>
-                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['title'] ?></td>
+                                    <td><?= $row['desc'] ?></td>
+                                    <td><?= $row['total'] ?></td>   
+                                    <td><?= $row['name'];?></td>  
                                     <td class="d-flex justify-content-around">
-                                        <a href="<?= base_url('user/show/'.$row['id'])?>" class="btn btn-primary btn-sm">View</a>
-                                        <a href="<?= base_url('user/edit/'.$row['id'])?>" class="btn btn-success btn-sm">Edit</a>
-                                        <form action="<?= base_url('user/delete/'.$row['id'])?>" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE" />
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user ?')">Delete</button>
-                                        </form>
-                                        
-                                    </td>
-                                </tr>
+                                        <a href="<?= base_url('quiz/user/show/'.$row['id'])?>" class="btn btn-primary btn-sm">Take the quiz</a>        
+                                    </td>                            
                                 <?php endforeach; ?>
+                                </tr>
+                                
+
                             </tbody>
                         </table>
                     </div>

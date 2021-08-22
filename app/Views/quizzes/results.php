@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4><?= $quiz['title']; ?>
-                        <a href="<?= base_url('quiz')?>" class="btn btn-danger float-right">BACK</a>
+                        <a href="<?= base_url('/userdashboard')?>" class="btn btn-danger float-right">Home Page</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -34,40 +34,51 @@
                             <label for="total">Total</label>
                             <label type="text" class="form-control" name="total" ><?= $quiz['total']; ?>
                         </div>
-                    </form>
-                    <table class="table table-bordered">
-                            <thead>
-                                <tr style="text-align:center;">
-                                    <th>Id</th>
-                                    <th>Question</th>
-                                    <th>Choice 1</th>
-                                    <th>Choice 2</th>
-                                    <th>Choice 3</th>
-                                    <th>Answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($question as $row) : ?>
-                                <tr style="text-align:center;">
-                                    <td><?= $row['id'] ?></td>
-                                    <td><?= $row['question'] ?></td>
-                                    <td><?= $row['choice1'] ?></td>
-                                    <td><?= $row['choice2'] ?></td>   
-                                    <td><?= $row['choice3'];?></td>  
-                                    <td><?= $row['answer'];?></td> 
-                           
-                            <?php endforeach; ?>
+                    
+                        <h4 name="score"><?php $score =0; ?></h4>
+                        
+                        <?php 
+                           $number_of_questions = sizeof($question);
+
+                           for($i=0;$i<$number_of_questions;$i++) { $correct_answer = $question[$i]['answer'];?>
+                            
+                                <form method="post" action="">  
+                            
+                                
+                                <p><?=$question[$i]['question']?></p>
                                 
 
-                                </tr>
+                                <?php if ($user_answers[$i] == $correct_answer) { ?>
+                                    <p><span style="background-color: #ADFFB4"><?=$user_answers[$i]?></span></p>
+                                    <?php $score = $score + 1; ?>
+                                 
+                                <?php } else { ?>
+                                    <p><span style="background-color: #FF9C9E"><?=$user_answers[$i]?></span></p>
+                                    <p><span style="background-color: #ADFFB4"><?=$question[$i]['answer']?></span></p>
+                                    
+                                
+                                <?php } } ?>
+                                <h4>Your Score: </h4>
+                                <h4><?=$score.'/'.$quiz['total']?></h4>
 
-                            </tbody>
-                        </table>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- <script>
+        const btn = document.querySelector('#sbtn');
+        const sb = document.querySelector('#exampleFormControlSelect1')
+        btn.onclick = (event) => {
+            event.preventDefault();
+            // show the selected value
+            console.log(sb.value);
+        };
+    </script> -->
+
     
 </body>
 </html>
+
+

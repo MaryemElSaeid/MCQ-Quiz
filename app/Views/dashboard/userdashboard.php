@@ -11,8 +11,20 @@
 
 </head>
 <body>
+    <div>
+         <?php if(session()->getFlashdata('success')) : ?>
+            <div class="success alert-success" style="border-radius:5px; padding:5px;text-align:center;"><?= session()->getFlashdata('success'); ?>
+         <?php endif ?>
+         <?php if(session()->getFlashdata('fail')) : ?>
+            <div class="success alert-danger" style="border-radius:5px; padding:5px;text-align:center;"><?= session()->getFlashdata('fail'); ?>
+         <?php endif ?>
+    </div>
+
     <h4>Welcome <?= $userInfo['name'] ?></h4>
     <h4>email <?= $userInfo['email'] ?></h4>
+    <a href="<?= base_url('quiz/list')?>" class="btn btn-primary ">All Quizzes</a>
+    <a href="<?= base_url('user/show/'.$userInfo['id'])?>" class="btn btn-primary">My Profile</a>
+    <a href="<?= base_url('user/edit/'.$userInfo['id'])?>" class="btn btn-primary">Edit Profile</a>
     <a href="<?= site_url("auth/logout"); ?>">Logout</a>
     
     

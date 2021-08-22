@@ -111,13 +111,7 @@ class UserDashboard extends BaseController
 					'is_unique'=>'Email already taken'
 				]
 			],
-			// 'password'=>[
-			// 	'rules'=>'required|min_length[5]',
-			// 	'errors'=>[
-			// 		'required'=>'Password is a required field',
-			// 		'min_length'=>'Password must have at least 5 characters',
-			// 	]
-			// ],
+
 		]);
 
 		if(!$validation){
@@ -139,7 +133,12 @@ class UserDashboard extends BaseController
 			'role_id'=>$role_id,
 		];
 		$userModel->update($id,$data);
-		return redirect()->to('/user')->with('success','User updated successfully');
+		if (session()->has('loggedUser')){
+			return redirect()->to('/userdashboard')->with('success','Profile updated successfully');
+		} else {
+            return redirect()->to('/user')->with('success','User updated successfully');
+		}
+		
 	}
 	}
 

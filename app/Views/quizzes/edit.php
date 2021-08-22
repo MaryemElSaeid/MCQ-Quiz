@@ -43,7 +43,7 @@
                     </form>
                     <table class="table table-bordered mt-4" >
                             <thead>
-                                <tr>
+                                <tr style="text-align:center;">
                                     <th>Id</th>
                                     <th>Question</th>
                                     <th>Choice 1</th>
@@ -55,7 +55,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($question as $row) : ?>
-                                <tr>
+                                <tr style="text-align:center;">
                                     <td><?= $row['id'] ?></td>
                                     <td><?= $row['question'] ?></td>
                                     <td><?= $row['choice1'] ?></td>

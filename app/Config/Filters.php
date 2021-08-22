@@ -22,6 +22,7 @@ class Filters extends BaseConfig
 		'AuthCheck' => \App\Filters\AuthCheckFilter::class,
 		'AlreadyLoggedIn' => \App\Filters\AlreadyLoggedInFilter::class,
 		'AdminCheck' => \App\Filters\AdminCheckFilter::class,
+		'PreventBack' => \App\Filters\PreventBackFilter::class,
 		
 	];
 

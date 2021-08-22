@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
+                                <tr style="text-align:center;">
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Description</th>
@@ -43,7 +43,7 @@
                             </thead>
                             <tbody>
                                 <?php foreach($quiz as $row) : ?>
-                                <tr>
+                                <tr style="text-align:center;">
                                     
                                     <td><?= $row['id'] ?></td>
                                     <td><?= $row['title'] ?></td>

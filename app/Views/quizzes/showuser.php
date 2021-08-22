@@ -21,7 +21,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                    <form>
+                    <form action="<?= base_url('quiz/check/'.$quiz['id']) ?>" method="POST">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <label type="text" class="form-control" name="title"><?= $quiz['title']; ?>
@@ -34,40 +34,29 @@
                             <label for="total">Total</label>
                             <label type="text" class="form-control" name="total" ><?= $quiz['total']; ?>
                         </div>
+                        <?php foreach($question as $row) { ?>
+                            
+                            <p><?=$row['question']?></p>
+    
+                        <?php $ans_array = array($row['choice1'], $row['choice2'], $row['choice3'], $row['answer']);
+                        shuffle($ans_array); ?>
+
+                        <select name="<?=$row['id']?>" class="form-control" id="exampleFormControlSelect1" >
+                            <option value="" disabled selected >------Select your answer------</option>
+                            <option name="<?=$row['id']?>" value="<?=$ans_array[0]?>" required> <?=$ans_array[0]?></option>
+                            <option name="<?=$row['id']?>" value="<?=$ans_array[1]?>"> <?=$ans_array[1]?></option>
+                            <option name="<?=$row['id']?>" value="<?=$ans_array[2]?>"> <?=$ans_array[2]?></option>
+                            <option name="<?=$row['id']?>" value="<?=$ans_array[3]?>"> <?=$ans_array[3]?></option>
+                        </select>   
+                        <?php  } ?>                           
+                    <button type="submit" class="btn btn-primary" id="sbtn">Submit</button>
                     </form>
-                    <table class="table table-bordered">
-                            <thead>
-                                <tr style="text-align:center;">
-                                    <th>Id</th>
-                                    <th>Question</th>
-                                    <th>Choice 1</th>
-                                    <th>Choice 2</th>
-                                    <th>Choice 3</th>
-                                    <th>Answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($question as $row) : ?>
-                                <tr style="text-align:center;">
-                                    <td><?= $row['id'] ?></td>
-                                    <td><?= $row['question'] ?></td>
-                                    <td><?= $row['choice1'] ?></td>
-                                    <td><?= $row['choice2'] ?></td>   
-                                    <td><?= $row['choice3'];?></td>  
-                                    <td><?= $row['answer'];?></td> 
-                           
-                            <?php endforeach; ?>
-                                
-
-                                </tr>
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div> 
 </body>
 </html>
+
+
