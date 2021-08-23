@@ -35,6 +35,7 @@ class UserDashboard extends BaseController
 	}
 
 	public function show($id) {
+		// dd(session()->get('loggedUser'));
 		$userModel = new UsersModel();
 		$userquizModel = new UserQuizModel();
 		$data['user'] = $userModel->find($id);

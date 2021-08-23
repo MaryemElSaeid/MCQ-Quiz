@@ -35,23 +35,18 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->group('', ['filter'=>'AdminCheck'],function($routes){
-	//add all routes that i want to protect by this filter
 	$routes->get('/admindashboard','AdminDashboard::index');
-	//user info
+	
 	$routes->get('user','UserDashboard::list');
 	$routes->get('user-add','UserDashboard::create');
 	$routes->post('user-store','UserDashboard::store');
 
-
-	//questions info 
 	$routes->get('question/add/(:num)','QuestionController::create/$1');
 	$routes->post('question/store/(:num)','QuestionController::store/$1');
-	// $routes->get('quiz/show/(:num)','QuizController::show/$1');
 	$routes->get('question/edit/(:num)','QuestionController::edit/$1');
 	$routes->put('question/update/(:num)','QuestionController::update/$1');
 	$routes->delete('question/delete/(:num)','QuestionController::delete/$1');
 	
-	//quiz data
 	$routes->get('quiz','QuizController::index');
 	$routes->get('quiz-add','QuizController::create');
 	$routes->post('quiz-store','QuizController::store');
@@ -60,14 +55,14 @@ $routes->group('', ['filter'=>'AdminCheck'],function($routes){
 	$routes->put('quiz/update/(:num)','QuizController::update/$1');
 	$routes->delete('quiz/delete/(:num)','QuizController::delete/$1');
 });
-//add group of routes to be protected by filter 
+
+
+
 $routes->group('', ['filter'=>'AuthCheck'],function($routes){
-	//add all routes that i want to protect by this filter
 	$routes->get('/userdashboard','UserDashboard::index');
 });
 
 $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
-	//add all routes that i want to protect by this filter
 	$routes->get('/auth','Auth::index');
 	$routes->get('/auth/register','Auth::register');
 
@@ -78,38 +73,19 @@ $routes->group('', ['filter'=>'PreventBack'],function($routes){
 	$routes->get('quiz/user/show/(:num)','QuizController::showQuizForUser/$1');
 });
 
-//user for user
-$routes->get('user/show/(:num)','UserDashboard::show/$1');
-$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
-$routes->put('user/update/(:num)','UserDashboard::update/$1');
-$routes->delete('user/delete/(:num)','UserDashboard::delete/$1');
+// $routes->group('', ['filter'=>' SecureEachUserRoutes'],function($routes){
 
-//quiz for user 
+	$routes->get('user/show/(:num)','UserDashboard::show/$1');
+	$routes->get('user/edit/(:num)','UserDashboard::edit/$1');
+	$routes->put('user/update/(:num)','UserDashboard::update/$1');
+	$routes->delete('user/delete/(:num)','UserDashboard::delete/$1');
+// });
+
+
 $routes->get('quiz/list','QuizController::listQuizForUser');
-
 $routes->post('quiz/check/(:num)','QuizController::check/$1');
 
-
-	///testtttttttt route
 $routes->get('/email','EmailController::index');
-
-//quiz data
-// $routes->get('quiz','QuizController::index');
-// $routes->get('quiz-add','QuizController::create');
-// $routes->post('quiz-store','QuizController::store');
-// $routes->get('quiz/show/(:num)','QuizController::show/$1');
-// $routes->get('quiz/edit/(:num)','QuizController::edit/$1');
-// $routes->put('quiz/update/(:num)','QuizController::update/$1');
-// $routes->delete('quiz/delete/(:num)','QuizController::delete/$1');
-
-
-//question data
-// $routes->get('quiz','QuizController::index');
-// $routes->get('quiz/show/(:num)','QuizController::show/$1');
-// $routes->get('question-add','QuestionController::create');
-// $routes->post('question-store','QuestionController::store');
-
-
 
 /*
  * --------------------------------------------------------------------
