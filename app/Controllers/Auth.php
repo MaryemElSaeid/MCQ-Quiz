@@ -7,6 +7,7 @@ use App\Libraries\Hash;
 
 class Auth extends BaseController
 {
+	//testttttttt commit
 	public function __construct(){
 		helper(['url' , 'form']);
 	}
