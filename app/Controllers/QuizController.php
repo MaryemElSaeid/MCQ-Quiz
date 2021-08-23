@@ -75,6 +75,7 @@ class QuizController extends BaseController
 
 		// dd($data);
 		$this->storeScore($data['quiz']['id'],$score);
+		$this->sendEmail();
 		return view('quizzes/results',$data);
 	
 	}
@@ -90,12 +91,24 @@ class QuizController extends BaseController
 		
 		$userquizModel->save($data);
 		session()->setFlashdata('score', '1');
-		// return redirect()->to('/user/test');
-		
 		// unset($_SESSION['score']);
+		
+	}
 
+	public function sendEmail(){
+		$email = \Config\Services::email();
+		$email->setFrom('quizapp@admin.com', 'Quiz Application');
+		$email->setTo('admin@admin.com');
+		$email->setSubject('Exam Notification');
+		$email->setMessage('An exam Has been submitted!');
 		
-		
+		$email->send();
+        //      echo 'success';
+		// } else {
+		// 	$error = $email->printDebugger(['header']);
+		// 	print_r($error);
+
+		// }
 	}
 
 	public function create(){
