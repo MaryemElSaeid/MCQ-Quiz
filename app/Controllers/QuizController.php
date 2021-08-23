@@ -12,17 +12,12 @@ use App\Controllers\UserDashboard;
 class QuizController extends BaseController
 {
 	public function __construct(){
-        //to use helper class
 		helper(['url' , 'form']);
 	}
 	public function index()
 	{
 		$quizModel = new QuizModel();
 		$data['quiz'] = $quizModel->getAllQuizzesQuery();
-		// $data['test'] = 'user';
-		// dd($data);
-
-		
 		return view('quizzes/index',$data);
 	}
 
@@ -38,7 +33,6 @@ class QuizController extends BaseController
 		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
 		$data['question'] = $questionModel->where('quiz_id',$id)->find();
-		// dd($data);
 		return view('quizzes/show',$data);
     }
 
@@ -48,7 +42,6 @@ class QuizController extends BaseController
 		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
 		$data['question'] = $questionModel->where('quiz_id',$id)->find();
-		// dd($data);
 		return view('quizzes/showuser',$data);
 	
 	}
@@ -59,7 +52,6 @@ class QuizController extends BaseController
 		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
 		$data['question'] = $questionModel->where('quiz_id',$id)->find();
-		// dd($data['quiz']['id']);
 		$number_of_questions = count($data['question']);
 		$data['user_answers']=[];
         $score = 0;
@@ -72,8 +64,6 @@ class QuizController extends BaseController
 				$score = $score + 1; 
 			}
 		}
-
-		// dd($data);
 		$this->storeScore($data['quiz']['id'],$score);
 		$this->sendEmail();
 		return view('quizzes/results',$data);
@@ -103,12 +93,6 @@ class QuizController extends BaseController
 		$email->setMessage('An exam Has been submitted!');
 		
 		$email->send();
-        //      echo 'success';
-		// } else {
-		// 	$error = $email->printDebugger(['header']);
-		// 	print_r($error);
-
-		// }
 	}
 
 	public function create(){
@@ -116,9 +100,6 @@ class QuizController extends BaseController
 	}
 
 	public function store(){
-		//to get admin id 
-		// dd(session()->get('loggedAdmin'));
-
 		$validation = $this->validate([
 			'title'=>[
 				'rules'=>'required|is_unique[quizzes.title]',
@@ -163,8 +144,6 @@ class QuizController extends BaseController
 		$quizModel->save($data);
 		$id = $quizModel->where('title',$title)->first();
 		return view('questions/create',$id);
-		// return redirect()->to('/question-add')->with('success','Quiz added successfully');
-
 		}
 	}
 
@@ -173,7 +152,6 @@ class QuizController extends BaseController
 		$questionModel = new QuestionsModel();
 		$data['quiz'] = $quizModel->find($id);
 		$data['question'] = $questionModel->where('quiz_id',$id)->find();
-		// dd($data);
 		return view('quizzes/edit',$data);
 	}
 
@@ -219,7 +197,6 @@ class QuizController extends BaseController
 		$desc = $this->request->getPost('desc');
 		$total = $this->request->getPost('total');
 		$host_id = session()->get('loggedAdmin');
-		// dd(session()->get('loggedAdmin'));
 		$data = [
 			'title'=>$title,
 			'desc'=>$desc,

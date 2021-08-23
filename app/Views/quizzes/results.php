@@ -66,18 +66,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- <script>
-        const btn = document.querySelector('#sbtn');
-        const sb = document.querySelector('#exampleFormControlSelect1')
-        btn.onclick = (event) => {
-            event.preventDefault();
-            // show the selected value
-            console.log(sb.value);
-        };
-    </script> -->
-
-    
+    </div>    
 </body>
 </html>
 

@@ -26,11 +26,6 @@ class AdminSeeder extends Seeder
 			'role_id' => 1
 		],
 	];
-
-	// // Simple Queries
-	// $this->db->query("INSERT INTO users (id,firstname, lastname, email, password,created_at,updated_at) VALUES(:id:,:firstname:,:lastname: :email:,:password:,:created_at:,:updated_at:)", $data);
-
-	// Using Query Builder
 	$this->db->table('users')->insertBatch($data);
 	}
 }

@@ -9,7 +9,6 @@ use App\Models\QuizModel;
 class QuestionController extends BaseController
 {
 	public function __construct(){
-        //to use helper class
 		helper(['url' , 'form']);
 	}
 	public function index()
@@ -19,9 +18,7 @@ class QuestionController extends BaseController
 
 	public function create($id){
 		$quizModel = new QuizModel();
-		// $data['quiz'] = $quizModel->find($id);
 		$id = $quizModel->where('id',$id)->first();
-		// dd($data);
 		return view('questions/create',$id);
 	}
 
@@ -87,20 +84,15 @@ class QuestionController extends BaseController
 			'answer'=>$answer,
 			'quiz_id' => $quiz_id,
 		];
-		// dd($data);
 		$questionModel->save($data);
 		$id = $quizModel->where('id',$id)->first();
-		// echo $id['id'];
 		return view('questions/create',$id);
-		// return redirect()->to('/quiz-store')->with('success','Question added successfully');
-
 		}
 	}
 
 	public function edit($id){
 		$questionModel = new QuestionsModel();
 		$data['question'] = $questionModel->find($id);
-		// dd($data);
 		return view('questions/edit',$data);
 	}
 
@@ -151,8 +143,6 @@ class QuestionController extends BaseController
 			$data['validation'] = $this->validator;
 			return view('questions/edit',$data);
 		} else {
-
-		// $quizModel = new QuizModel();
 		$question = $this->request->getPost('question');
 		$choice1 = $this->request->getPost('choice1');
 		$choice2 = $this->request->getPost('choice2');
@@ -166,7 +156,6 @@ class QuestionController extends BaseController
 			'answer'=>$answer,
 		];
 		$questionModel->update($id,$data);
-		// return view('quizzes/index');
 		return redirect()->to('/quiz')->with('success','Question updated successfully');
 	}
 	}
@@ -175,9 +164,6 @@ class QuestionController extends BaseController
 	public function delete($id){
 		$questionModel = new QuestionsModel();
         $questionModel->delete($id);
-		// $id = $quizModel->where('id',$id)->first();
-		// echo $id['id'];
-		// return view('quiz/show/',$id);
 		return redirect()->to('/quiz')->with('fail','Question deleted successfully');
 	}
 

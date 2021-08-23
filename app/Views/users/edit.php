@@ -33,11 +33,6 @@
                             <input type="text" class="form-control" name="email" placeholder="Email" value="<?= $user['email']; ?>">
                             <span class="text-danger"><?= isset($validation) ? display_error($validation, 'email') : '' ?></span>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Password" value="<?= $user['password']; ?>">
-                            <span class="text-danger"><?= isset($validation) ? display_error($validation, 'password') : '' ?></span>
-                        </div> -->
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                                             

@@ -8,7 +8,6 @@ use App\Libraries\Hash;
 class Auth extends BaseController
 {
 	public function __construct(){
-        //to use helper class
 		helper(['url' , 'form']);
 	}
 	public function index()
@@ -23,8 +22,6 @@ class Auth extends BaseController
 
 	public function save()
 	{
-		//request validations
-		//custom validations messages
 		$validation = $this->validate([
 			'name'=>[
 				'rules'=>'required',
@@ -63,7 +60,6 @@ class Auth extends BaseController
 		if(!$validation){
 			return view('auth/register',['validation' =>$this->validator]);
 		} else {
-			//if all validations are passed add to db
 			$name = $this->request->getPost('name');
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
@@ -78,17 +74,11 @@ class Auth extends BaseController
 
 
 			$userModel = new \App\Models\UsersModel();
-			//insert data into database
 			$query = $userModel->insert($values);
-
-			// if data not inserted in db
 			if(!$query){
 				return redirect()->back()->with('fail','Something went wrong');
-				// return redirect()->to('register')->with('fail','Something went wrong');
+				
 			} else {
-				// return redirect()->to('auth/register')->with('success','You registred successfully');
-				//if registered successfully redirect to userdash 
-				// make user login automatically 
 			    $last_id = $userModel->insertID();
 				session()->set("loggedUser",$last_id);
 				return redirect()->to('/userdashboard');
@@ -99,8 +89,6 @@ class Auth extends BaseController
 
 	function check(){
 		$validation = $this->validate([
-			//is_not_unique checks if email is in db
-			//here are the intial checks before searching in db 
 			'email'=>[
 				'rules'=>'required|valid_email|is_not_unique[users.email]',
 				'errors'=>[
@@ -124,34 +112,25 @@ class Auth extends BaseController
 			$email = $this->request->getPost('email');
 			$password = $this->request->getPost('password');
 			$userModel = new \App\Models\UsersModel();
-			//fetch user info according to email 
+
 			$user_info = $userModel->where('email',$email)->first();
 			$roleid = $user_info['role_id'];
-			// dd($roleid);
+
 			$check_password = Hash::check($password,$user_info['password']);
     
 			if($roleid == 1 && $check_password ){
 				$user_id = $user_info['id'];
 				session()->set('loggedAdmin',$user_id);
 				return redirect()->to('/admindashboard');
-				// dd(session());
-				//redirect de l controller msh view
-				// if(session()->has('loggedAdmin')){
-				// 	dd(session());
-				// }
 			}
 	
-            //law 3adda mn el if de yb2a da msh admin w aroo7 
-			//a check 3ala info bt3to fel db 
+
 			if(!$check_password){
 				session()->setFlashdata('fail','Incorrect Password');
 				return redirect()->to('/auth')->withInput();
 			} else {
 				$user_id = $user_info['id'];
 				session()->set('loggedUser',$user_id);
-				// if(session()->has('loggedAdmin')){
-				// 	dd(session());
-				// }
 				return redirect()->to('/userdashboard');
 
 			}

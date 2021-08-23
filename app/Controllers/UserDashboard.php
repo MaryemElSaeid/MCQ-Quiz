@@ -10,7 +10,6 @@ use App\Models\UserQuizModel;
 class UserDashboard extends BaseController
 {
 	public function __construct(){
-        //to use helper class
 		helper(['url' , 'form']);
 	}
 	public function index()
@@ -39,20 +38,8 @@ class UserDashboard extends BaseController
 		$userModel = new UsersModel();
 		$userquizModel = new UserQuizModel();
 		$data['user'] = $userModel->find($id);
-		// dd($data['user']['id']);
 		$user_id = $data['user']['id'];
 		$data['userquiz'] = $userquizModel->getAllUserQuizzesQuery($user_id);
-		// dd($data['userquiz']);
-
-		// dd($data['userquiz']);
-		// $number_of_quizzes = sizeof($data['userquiz']);
-		// $data['quiz'] = [];
-		// for($i=0;$i<$number_of_quizzes;$i++) {
-		//    array_push($data['quiz'],$quizModel->find($data['userquiz'][$i]['quiz_id']));
-		// //    $data['quiz'] = $quizModel->find($quiz_id);
-		// }
-		// $data['quiz'] = $quizModel->find($quiz_id);
-		// dd($data);
 		return view('users/show',$data);
     }
 
@@ -110,7 +97,6 @@ class UserDashboard extends BaseController
 	public function edit($id){
 		$userModel = new UsersModel();
 		$data['user'] = $userModel->find($id);
-		// dd($data);
 		return view('users/edit',$data);
 	}
 
@@ -145,12 +131,10 @@ class UserDashboard extends BaseController
 
 		$name = $this->request->getPost('name');
 		$email = $this->request->getPost('email');
-		// $password = $this->request->getPost('password');
 		$role_id = $this->role_id = 2;
 		$data = [
 			'name'=>$name,
 			'email'=>$email,
-			// 'password'=>password_hash($password, PASSWORD_BCRYPT),
 			'role_id'=>$role_id,
 		];
 		$userModel->update($id,$data);
