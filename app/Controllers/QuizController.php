@@ -7,6 +7,7 @@ use App\Models\QuizModel;
 use App\Models\UserQuizModel;
 use App\Models\UsersModel;
 use App\Models\QuestionsModel;
+use App\Controllers\UserDashboard;
 
 class QuizController extends BaseController
 {
@@ -18,6 +19,10 @@ class QuizController extends BaseController
 	{
 		$quizModel = new QuizModel();
 		$data['quiz'] = $quizModel->getAllQuizzesQuery();
+		// $data['test'] = 'user';
+		// dd($data);
+
+		
 		return view('quizzes/index',$data);
 	}
 
@@ -84,7 +89,11 @@ class QuizController extends BaseController
 		];
 		
 		$userquizModel->save($data);
+		session()->setFlashdata('score', '1');
+		// return redirect()->to('/user/test');
+		
 		// unset($_SESSION['score']);
+
 		
 		
 	}

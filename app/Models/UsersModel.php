@@ -12,6 +12,11 @@ class UsersModel extends Model
 	protected $allowedFields = ['name','email','password','role_id'];
 	public $has_many = array( "quizzes" );
 	public $has_one = array( "roles" );
+	public function list(){
+
+echo 'helllooooooooooo';
+					  
+	   } 
 
 
 	

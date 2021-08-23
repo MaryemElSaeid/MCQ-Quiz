@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
+use App\Models\QuizModel;
+use App\Models\UserQuizModel;
 
 class UserDashboard extends BaseController
 {
@@ -21,6 +23,10 @@ class UserDashboard extends BaseController
 			'userInfo'=>$userInfo
 		];
 		return view('dashboard/userdashboard',$data);
+	} 
+
+	public function test(){
+		dd('hellooooo');
 	}
 
 	public function list(){
@@ -31,7 +37,22 @@ class UserDashboard extends BaseController
 
 	public function show($id) {
 		$userModel = new UsersModel();
+		$userquizModel = new UserQuizModel();
 		$data['user'] = $userModel->find($id);
+		// dd($data['user']['id']);
+		$user_id = $data['user']['id'];
+		$data['userquiz'] = $userquizModel->getAllUserQuizzesQuery($user_id);
+		// dd($data['userquiz']);
+
+		// dd($data['userquiz']);
+		// $number_of_quizzes = sizeof($data['userquiz']);
+		// $data['quiz'] = [];
+		// for($i=0;$i<$number_of_quizzes;$i++) {
+		//    array_push($data['quiz'],$quizModel->find($data['userquiz'][$i]['quiz_id']));
+		// //    $data['quiz'] = $quizModel->find($quiz_id);
+		// }
+		// $data['quiz'] = $quizModel->find($quiz_id);
+		// dd($data);
 		return view('users/show',$data);
     }
 

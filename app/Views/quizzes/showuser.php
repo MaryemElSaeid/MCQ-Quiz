@@ -17,7 +17,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h4><?= $quiz['title']; ?>
-                        <a href="<?= base_url('quiz')?>" class="btn btn-danger float-right">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">

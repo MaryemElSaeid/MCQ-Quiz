@@ -29,6 +29,27 @@
                             <label for="email">Email</label>
                             <label type="text" class="form-control" name="email" ><?= $user['email']; ?>
                         </div>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="text-align:center;">
+                                    <th>Quiz</th>
+                                    <th>Score</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <?php foreach($userquiz as $row) : ?>
+                                <tr style="text-align:center;">
+                                    <td><?= $row['title'] ?></td>
+                                    <td><?= $row['score'] ?></td>
+                                    <td><?= date("Y-m-d", strtotime($row['created_at'])) ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+
+                            </tbody>
+                        </table>
                     </form>
                                             
                     </div>

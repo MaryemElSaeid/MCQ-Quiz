@@ -25,8 +25,8 @@ class PreventBackFilter implements FilterInterface
 	 */
 	public function before(RequestInterface $request, $arguments = null)
 	{
-		if(!session()->has('score')){
-			return redirect()->to('/userdashboard');	
+		if(session()->has('score')){
+			return redirect()->to('/quiz/list');	
 		}
 	}
 

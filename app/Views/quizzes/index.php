@@ -26,6 +26,8 @@
                     <div class="card-header">
                         <h4>All Quizzes Data
                         <a href="<?= base_url('quiz-add')?>" class="btn btn-primary float-right">Add Quiz</a>
+                        <a href="<?= base_url('/admindashboard')?>" class="btn btn-danger float-right">BACK</a>
+                     
                         </h4>
 
                     </div>

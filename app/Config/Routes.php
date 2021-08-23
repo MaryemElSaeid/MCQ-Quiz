@@ -42,6 +42,7 @@ $routes->group('', ['filter'=>'AdminCheck'],function($routes){
 	$routes->get('user-add','UserDashboard::create');
 	$routes->post('user-store','UserDashboard::store');
 
+
 	//questions info 
 	$routes->get('question/add/(:num)','QuestionController::create/$1');
 	$routes->post('question/store/(:num)','QuestionController::store/$1');
@@ -72,10 +73,10 @@ $routes->group('', ['filter'=>'AlreadyLoggedIn'],function($routes){
 
 });
 
-// $routes->group('', ['filter'=>'PreventBack'],function($routes){
+$routes->group('', ['filter'=>'PreventBack'],function($routes){
 
 	$routes->get('quiz/user/show/(:num)','QuizController::showQuizForUser/$1');
-// });
+});
 
 //user for user
 $routes->get('user/show/(:num)','UserDashboard::show/$1');
@@ -88,6 +89,9 @@ $routes->get('quiz/list','QuizController::listQuizForUser');
 
 $routes->post('quiz/check/(:num)','QuizController::check/$1');
 
+
+	///testtttttttt route
+$routes->get('/email','EmailController::index');
 
 //quiz data
 // $routes->get('quiz','QuizController::index');

@@ -90,7 +90,7 @@ class QuestionController extends BaseController
 		// dd($data);
 		$questionModel->save($data);
 		$id = $quizModel->where('id',$id)->first();
-		echo $id['id'];
+		// echo $id['id'];
 		return view('questions/create',$id);
 		// return redirect()->to('/quiz-store')->with('success','Question added successfully');
 
