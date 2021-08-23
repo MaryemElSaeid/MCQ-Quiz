@@ -23,7 +23,6 @@ class Filters extends BaseConfig
 		'AlreadyLoggedIn' => \App\Filters\AlreadyLoggedInFilter::class,
 		'AdminCheck' => \App\Filters\AdminCheckFilter::class,
 		'PreventBack' => \App\Filters\PreventBackFilter::class,
-		' SecureEachUserRoutes' => \App\Filters\ SecureEachUserRoutesFilter::class
 		
 	];
 
