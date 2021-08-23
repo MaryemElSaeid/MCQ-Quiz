@@ -24,6 +24,7 @@ class Database extends Config
 	 * @var string
 	 */
 	public $defaultGroup = 'default';
+	
 
 	/**
 	 * The default database connection.
@@ -90,6 +91,9 @@ class Database extends Config
 			$this->defaultGroup = 'tests';
 		}
 	}
+
+
+	
 
 	//--------------------------------------------------------------------
 
