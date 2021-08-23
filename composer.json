@@ -7,7 +7,7 @@
 	"require": {
 		"php": "^7.3||^8.0",
 		"codeigniter4/framework": "^4",
-		"silex/silex": "~1.1"
+		"symfony/flex": "*"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",
